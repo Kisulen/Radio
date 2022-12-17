@@ -1,35 +1,65 @@
 package ru.netology.javaqa;
 
 public class Radio {
-    public int currentStationNumber;
-    public int currentVolume;
+    private int numberOfStations = 10;
+    private int maxStationNumber;
+    private int minStationNumber = 0;
+    private int currentStationNumber;
+    private int maxVolume = 100;
+    private int minVolume = 0;
+    private int currentVolume;
+
+    public Radio(int numberOfStations) {
+        this.numberOfStations = numberOfStations;
+        this.maxStationNumber = numberOfStations -1;
+        this.minStationNumber = minStationNumber;
+    }
+
+    public Radio () {
+        this.numberOfStations = 10;
+        this.maxStationNumber = 9;
+        this.minStationNumber = 0;
+    }
+
+    public Radio (int maxVolume, int minVolume) {
+        this.maxVolume = maxVolume;
+        this.minVolume = minVolume;
+    }
 
     public int getStationNumber() {
         return currentStationNumber;
     }
 
     public void setStationNumber(int newStationNumber) {
-        if (newStationNumber < 0 || newStationNumber > 9) {
+        if (newStationNumber < minStationNumber || newStationNumber > maxStationNumber) {
             return;
         }
         currentStationNumber = newStationNumber;
     }
 
+    public int getMaxStationNumber () {
+        return maxStationNumber;
+    }
+
+    public int getMinStationNumber () {
+        return minStationNumber;
+    }
+
     public void next() {
-        if (currentStationNumber < 9) {
+        if (currentStationNumber < maxStationNumber) {
             currentStationNumber = currentStationNumber + 1;
         }
-        if (currentStationNumber >= 9) {
-            currentStationNumber = 0;
+        if (currentStationNumber >= maxStationNumber) {
+            currentStationNumber = minStationNumber;
         }
     }
 
     public void prev() {
-        if (currentStationNumber > 0) {
+        if (currentStationNumber > minStationNumber) {
             currentStationNumber = currentStationNumber - 1;
         }
-        if (currentStationNumber <= 0) {
-            currentStationNumber = 9;
+        if (currentStationNumber <= minStationNumber) {
+            currentStationNumber = maxStationNumber;
         }
     }
 
@@ -39,29 +69,39 @@ public class Radio {
     }
 
     public void setCurrentVolume(int newVolume) {
-        if (newVolume < 0 || newVolume > 10) {
-            return;
+        if (newVolume < minVolume) {
+            newVolume = minVolume;
+        }
+        if (newVolume > maxVolume) {
+            newVolume = maxVolume;
         }
         currentVolume = newVolume;
     }
 
+    public int getMaxVolume () {
+        return maxVolume;
+    }
+    public int getMinVolume () {
+        return minVolume;
+    }
+
     public void increaseVolume() {
 
-        if (currentVolume < 10) {
+        if (currentVolume < maxVolume) {
             currentVolume = currentVolume + 1;
         }
-        if (currentVolume >= 10) {
-            currentVolume = 10;
+        if (currentVolume >= maxVolume) {
+            currentVolume = maxVolume;
         }
     }
 
     public void decreaseVolume() {
 
-        if (currentVolume > 0) {
+        if (currentVolume > minVolume) {
             currentVolume = currentVolume - 1;
         }
-        if (currentVolume <= 0) {
-            currentVolume = 0;
+        if (currentVolume <= minVolume) {
+            currentVolume = minVolume;
         }
     }
 }
